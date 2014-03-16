@@ -23,8 +23,8 @@ var stringifyJSON = function (obj) {
           result += stringifyJSON(theKey) + ":" + stringifyJSON(theValue);
           console.log("i: " + i + "; obSize: " + obSize );
           if ( i < obSize ) result += ",";
-          i++;
         }
+        i++;  //Needs to be incremented outside of the above if statement to account for non-stringifyable k/v pairs
       }
       result += "}";
     }
@@ -32,17 +32,9 @@ var stringifyJSON = function (obj) {
     result += "[";
     for ( var i = 0; i < obj.length; i++ ) {
       var item = obj[i];
-      if (Array.isArray(item)) {
-        result += stringifyJSON(item);
-      } else {
-        if (typeof item === 'string'){
-          item = '"' + item + '"';
-        }
-        if ( i < obj.length - 1){
-          result += item + ",";
-        } else {
-        result += item;
-        }
+      result += stringifyJSON(item);
+      if ( i < obj.length - 1){
+          result += ",";
       }
     } 
     result += "]";
@@ -59,6 +51,5 @@ var stringifyJSON = function (obj) {
   } else if ( obj === undefined ) {
     console.log("Can't stringify undefined value");
   }
-
   return result;
 }
