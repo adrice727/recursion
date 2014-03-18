@@ -10,21 +10,18 @@ var getElementsByClassName = function (className) {
 
   function checkForClass(node) {
     node = node || document.body;
-    if ( node ) {
-      var children = node.childNodes;
-      var list = node.classList
-      console.log("the list: " + list);
-      if ( list ) {
-        for ( var i = 0; i < list.length; i++ ) {
-          if ( list[i] === className ) {
-            Array.prototype.push.call(result, node);
-          }    
-        }
+    var children = node.childNodes;
+    var list = node.classList
+    if ( list ) {
+      for ( var i = 0; i < list.length; i++ ) {
+        if ( list[i] === className ) {
+          Array.prototype.push.call(result, node);
+        }    
       }
-      if ( children ) {
-        for ( var i = 0; i < children.length; i++) {
-          checkForClass(children[i]);
-        }
+    }
+    if ( children ) {
+      for ( var i = 0; i < children.length; i++) {
+        checkForClass(children[i]);
       }
     }
   }
