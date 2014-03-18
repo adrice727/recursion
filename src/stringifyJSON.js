@@ -6,8 +6,6 @@ var stringifyJSON = function (obj) {
 
   var result = "";
 
-
-  
   if ( Object.prototype.toString.call(obj) === "[object Object]"){  
     var obSize = Object.keys(obj).length;
     if ( obSize === 0 ) {
@@ -21,7 +19,6 @@ var stringifyJSON = function (obj) {
 
         if ( theKey !== undefined && typeof theKey !== 'function' && theValue !== undefined && typeof theValue !== 'function' ){
           result += stringifyJSON(theKey) + ":" + stringifyJSON(theValue);
-          console.log("i: " + i + "; obSize: " + obSize );
           if ( i < obSize ) result += ",";
         }
         i++;  //Needs to be incremented outside of the above if statement to account for non-stringifyable k/v pairs
